@@ -1,5 +1,4 @@
-import java.io.BufferedReader;
-import java.io.FileReader;
+import java.io.*;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -13,7 +12,7 @@ public class Main {
     public static Persoana[] clienti;
     public static List<Depozit> depozite = new ArrayList<>();
 
-    public static void main(String[] args){
+    public static void main(String[] args) throws FileNotFoundException {
         //citire din clienti.csv
         System.out.println("Citire clienti din fisier clienti.csv");
         citireClienti("clienti.csv");
@@ -29,6 +28,9 @@ public class Main {
         for (Depozit depozit : depozite){
             System.out.println(depozit);
         }
+
+        //scriere in fisier pt depozite in euro
+        scriereFisierText();
 
     }
     public static void citireClienti(String numeFisier){
@@ -81,6 +83,27 @@ public class Main {
             System.err.println(e);
         }
 
+    }
+
+    public static void scriereFisierText() throws FileNotFoundException {
+        try(PrintWriter out = new PrintWriter("depozite_in_euro.txt")){
+            out.println("Depozite in Euro:\n");
+            out.println("------------------\n");
+            for(Depozit depozit: depozite){
+                if(String.valueOf(depozit.getMoneda()) == "EURO"){
+                    out.println("Titular:");
+                    out.println(depozit.getTitular());
+                    out.println("Cod contract:");
+                    out.println(depozit.getCodContract());
+                    out.println("Valoare:");
+                    out.println(depozit.getValoare());
+                    out.println("\n");
+                }
+            }
+        }
+        catch(Exception e){
+            System.err.println(e);
+        }
     }
 
     private static Persoana cautare(long cnp){

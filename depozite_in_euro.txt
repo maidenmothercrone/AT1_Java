@@ -1,0 +1,28 @@
+Depozite in Euro:
+
+------------------
+
+Titular:
+Persoana{nume='Manea Ioana', cnp=2781111123456, adresa=Adresa{localitate='Covasna', judet='Covasna', strada='Toamnei', numar='1', cod=3489}}
+Cod contract:
+112
+Valoare:
+10000.0
+
+
+Titular:
+Persoana{nume='Georgescu Liviu', cnp=2701212038976, adresa=Adresa{localitate='Bucuresti', judet='Bucuresti', strada='Str. Brasov', numar='8', cod=4444}}
+Cod contract:
+113
+Valoare:
+5000.0
+
+
+Titular:
+Persoana{nume='Popescu Maria', cnp=267031157835, adresa=Adresa{localitate='Brasov', judet='Brasov', strada='1 Decembrie', numar='11', cod=3455}}
+Cod contract:
+115
+Valoare:
+5000.0
+
+
