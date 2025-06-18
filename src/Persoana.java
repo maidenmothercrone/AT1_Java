@@ -1,6 +1,7 @@
+import java.io.Serializable;
 import java.util.Objects;
 
-public class Persoana {
+public class Persoana implements Serializable {
     private String nume;
     private long cnp;
     private Adresa adresa;

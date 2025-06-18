@@ -1,7 +1,8 @@
+import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
 
-public class Depozit extends Cont implements OperatiuniDepozite{
+public class Depozit extends Cont implements OperatiuniDepozite, Serializable {
     private TipDepozit tipDepozit;
     private int codContract;
     private Persoana imputernicit;

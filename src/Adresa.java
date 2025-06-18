@@ -1,4 +1,6 @@
-public class Adresa implements Cloneable{
+import java.io.Serializable;
+
+public class Adresa implements Cloneable, Serializable {
     private String localitate, judet, strada, numar;
     private int cod;
 

@@ -32,6 +32,16 @@ public class Main {
         //scriere in fisier pt depozite in euro
         scriereFisierText();
 
+        //serializare depozite
+        serializare();
+
+        //deserializare depozite;
+        System.out.println("\nDeserializare:");
+        deserializare();
+        for(Depozit depozit: depozite){
+            System.out.println(depozit);
+        }
+
     }
     public static void citireClienti(String numeFisier){
         try(BufferedReader in = new BufferedReader(new FileReader(numeFisier))){
@@ -113,5 +123,29 @@ public class Main {
             }
         }
         return null;
+    }
+
+    private static void serializare(){
+        try(ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("depozite.dat"))){
+            for(Depozit depozit: depozite) {
+                out.writeObject(depozit);
+            }
+        }
+        catch(Exception e){
+            System.err.println(e);
+        }
+    }
+
+    private static void deserializare(){
+        depozite.clear();
+        try(FileInputStream in1 = new FileInputStream("depozite.dat");
+        ObjectInputStream in2 = new ObjectInputStream(in1)){
+            while(in1.available()!=0){
+                depozite.add((Depozit)in2.readObject());
+            }
+        }
+        catch(Exception e){
+            System.err.println(e);
+        }
     }
 }
