@@ -1,9 +1,7 @@
 import java.io.*;
 import java.time.Instant;
-import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.*;
 import java.text.SimpleDateFormat;
-import java.util.List;
 
 import static java.lang.String.format;
 
@@ -17,7 +15,7 @@ public class Main {
         System.out.println("Citire clienti din fisier clienti.csv");
         citireClienti("clienti.csv");
         System.out.println("Clienti cititi:");
-        for(Persoana client : clienti){
+        for (Persoana client : clienti) {
             System.out.println(client);
         }
 
@@ -25,7 +23,7 @@ public class Main {
         System.out.println("Citire depozite din fisierul depozite.csv");
         citireDepozite("depozite.csv");
         System.out.println("Depozite citite:");
-        for (Depozit depozit : depozite){
+        for (Depozit depozit : depozite) {
             System.out.println(depozit);
         }
 
@@ -38,9 +36,37 @@ public class Main {
         //deserializare depozite;
         System.out.println("\nDeserializare:");
         deserializare();
-        for(Depozit depozit: depozite){
+        for (Depozit depozit : depozite) {
             System.out.println(depozit);
         }
+
+        int codContract = 113;
+//            Cautare
+        Depozit depozitCautat = new Depozit(codContract);
+        int k = depozite.indexOf(depozitCautat);
+        if (k == -1) {
+            System.out.println("Nu am gasit depozitul cu codul " + codContract);
+        } else {
+            System.out.println("Depozitul cautat:\n" + depozite.get(k));
+        }
+//            Sortare
+        Collections.sort(depozite);
+        System.out.println("\nDepozite sortate dupa data:");
+        for (Depozit depozit : depozite) {
+            System.out.println(depozit);
+        }
+//            Sortare dupa valoare
+        Collections.sort(depozite, new Comparator<Depozit>() {
+            @Override
+            public int compare(Depozit o1, Depozit o2) {
+                return Double.compare(o1.getValoare(), o2.getValoare());
+            }
+        });
+        System.out.println("Depozitele sortate dupa valoare:");
+        for (Depozit depozit : depozite) {
+            System.out.println(depozit);
+        }
+
 
     }
     public static void citireClienti(String numeFisier){

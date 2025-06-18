@@ -23,6 +23,9 @@ public class Depozit extends Cont implements OperatiuniDepozite, Serializable {
         this.imputernicit = imputernicit;
     }
 
+    public Depozit(int codContract) {
+    }
+
     public TipDepozit getTipDepozit() {
         return tipDepozit;
     }
@@ -72,5 +75,10 @@ public class Depozit extends Cont implements OperatiuniDepozite, Serializable {
     public double calculDobanda(){
         double dobandaLunara = ((tipDepozit.getRataDobanzii()*super.getSold())*100)/12;
         return dobandaLunara;
+    }
+
+    @Override
+    public int compareTo(Object o) {
+        return 0;
     }
 }

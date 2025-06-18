@@ -1,8 +1,6 @@
-import java.time.LocalDate;
 import java.util.Date;
-import java.util.Objects;
 
-public abstract class Cont {
+public abstract class Cont implements Comparable, ContInterfata {
     private Persoana titular;
     private Date dataDeschidere;
     private Moneda moneda;
@@ -90,6 +88,7 @@ public abstract class Cont {
                 '}';
     }
 
+    @Override
     public int compareTo(Date anotherDate) {
         return dataDeschidere.compareTo(anotherDate);
     }

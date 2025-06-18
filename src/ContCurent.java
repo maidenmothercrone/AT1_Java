@@ -41,4 +41,9 @@ public class ContCurent extends Cont implements Operatiuni{
     public int hashCode() {
         return Objects.hashCode(codIban);
     }
+
+    @Override
+    public int compareTo(Object o) {
+        return 0;
+    }
 }
