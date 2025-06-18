@@ -1,9 +1,18 @@
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.time.Instant;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.text.SimpleDateFormat;
+import java.util.List;
+
+import static java.lang.String.format;
 
 public class Main {
+    public static SimpleDateFormat format = new SimpleDateFormat("dd.MM.yyyy");
     public static Persoana[] clienti;
+    public static List<Depozit> depozite = new ArrayList<>();
+
     public static void main(String[] args){
         //citire din clienti.csv
         System.out.println("Citire clienti din fisier clienti.csv");
@@ -11,6 +20,14 @@ public class Main {
         System.out.println("Clienti cititi:");
         for(Persoana client : clienti){
             System.out.println(client);
+        }
+
+        //citire depozite din depozite.csv
+        System.out.println("Citire depozite din fisierul depozite.csv");
+        citireDepozite("depozite.csv");
+        System.out.println("Depozite citite:");
+        for (Depozit depozit : depozite){
+            System.out.println(depozit);
         }
 
     }
@@ -37,5 +54,41 @@ public class Main {
         catch (Exception e){
             System.err.println(e);
         }
+    }
+
+    public static void citireDepozite(String numeFisier){
+        try(BufferedReader in = new BufferedReader(new FileReader(numeFisier))){
+            String linie;
+            while((linie = in.readLine()) !=null){
+                Depozit depozit = new Depozit();
+                String[] elemente = linie.split(",");
+                long cnp = Long.parseLong(elemente[0].trim());
+                Persoana titular = cautare(cnp);
+                depozit.setTitular(titular);
+                if(!elemente[1].trim().isEmpty()){
+                    depozit.setImputernicit(cautare(Long.parseLong(elemente[1].trim())));
+                }
+                depozit.setDataDeschidere(format.parse(elemente[2].trim()));
+                depozit.setMoneda(Moneda.valueOf(elemente[3].trim().toUpperCase()));
+                depozit.setValoare(Double.parseDouble(elemente[4].trim()));
+                depozit.setSucursala(elemente[5].trim());
+                depozit.setTipDepozit(TipDepozit.valueOf(elemente[6].trim().toUpperCase()));
+                depozit.setCodContract(Integer.parseInt(elemente[7].trim()));
+                depozite.add(depozit);
+            }
+        }
+        catch(Exception e){
+            System.err.println(e);
+        }
+
+    }
+
+    private static Persoana cautare(long cnp){
+        for(Persoana persoana:clienti){
+            if(persoana.getCnp()==cnp){
+                return persoana;
+            }
+        }
+        return null;
     }
 }
